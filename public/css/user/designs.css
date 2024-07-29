@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    outline: none;
+    background: #ebceff;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.box .images{
+    text-align: center;
+}
+
+.images img{
+    object-fit: fill;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.content p{
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}

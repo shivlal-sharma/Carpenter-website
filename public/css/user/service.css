@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    outline: none;
+    background: #d4c1ff;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+}
+
+.innerBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-block: 10px;
+}
+
+.innerBox img{
+    object-fit: fill;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    height: 300px;
+    width: 300px;
+}
+
+.innerBox .content{
+    text-align: justify;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    margin-inline: 10px;
+    border-radius: 10px;
+}
+
+.reverseBox{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-block: 10px;
+}
+
+.reverseBox img{
+    object-fit: fill;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    height: 300px;
+    width: 300px;
+}
+
+.reverseBox .content{
+    text-align: justify;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    margin-inline: 10px;
+    border-radius: 10px;
+}
+
+b{
+    font-style: italic;
+    color: #00f;
+    text-decoration: underline;
+}

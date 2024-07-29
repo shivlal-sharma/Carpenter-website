@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footerBox{
+    border: none;
+    outline: none;
+    background: #e2e2e2;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.about{
+    padding: 10px;
+}
+
+.contact{
+    padding: 10px;
+}
+
+.social{
+    padding: 10px;
+}
+
+h2{
+    margin-bottom: 10px;
+}
+
+.social img{
+    object-fit: contain;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-inline: 3px;
+}
+
+.social p{
+    display: inline-block;
+}
+
+p{
+    font-size: 1.1rem;
+}
+
+i{
+    margin-right: 5px;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+#copyright{
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}

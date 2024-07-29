@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: url('/images/user/bg2.jpg') no-repeat center center/cover;
+}
+
+.content{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message{
+    color: #0f0;
+    font-size: 1.2rem;
+    border: 1px solid #0f0;
+    outline: none;
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#success{
+    color: #0f0;
+    border: 1px solid #0f0;
+}
+
+#error{
+    color: #f00;
+    border: 1px solid #f00;
+}
+
+.message i{
+    margin-left:15px;
+    color: #00ffcc;
+    cursor: pointer;
+}
+
+form {
+    border: none;
+    outline: none;
+    margin-inline: auto;
+    margin-block: auto;
+    color: #fff;
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    text-align: center;
+    font-size: 1.5rem;
+    outline: none;
+    border-bottom: 1px solid #00f2ff;
+}
+
+.input {
+    margin: 15px 0px;
+    position: relative;
+}
+
+input {
+    width: 100%;
+    border: 0.5px solid #ffffff;
+    outline: none;
+    padding: 5px 40px 5px 10px;
+    font-size: 1.1rem;
+    background: transparent;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.alert {
+    color: #ffff00;
+}
+
+.input a {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #ffff00;
+}
+
+.input i{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    cursor: pointer;
+}
+
+::placeholder{
+    color: #fff;
+}
+
+.input a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background: transparent;
+    width: 100%;
+    color: #00ff00;
+    padding: 5px 0px;
+    border: 1px solid #0f0;
+    outline: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+p a {
+    font-size: 1.1rem;
+    margin-left: 10px;
+    text-decoration: none;
+    color: yellow;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
