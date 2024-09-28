@@ -103,13 +103,13 @@ let display = document.getElementById('show');
 display.addEventListener('click',(e)=>{
     if(pass.type == 'password'){
         pass.type = 'text';
-        display.classList.remove('fa-eye');
-        display.classList.add('fa-eye-slash');
+        display.classList.remove('fa-eye-slash');
+        display.classList.add('fa-eye');
     }
     else{
         pass.type = 'password';
-        display.classList.remove('fa-eye-slash');
-        display.classList.add('fa-eye');
+        display.classList.remove('fa-eye');
+        display.classList.add('fa-eye-slash');
     }
 });
 

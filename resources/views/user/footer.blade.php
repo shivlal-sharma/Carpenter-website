@@ -8,41 +8,37 @@
     <link rel="stylesheet" href="{{asset('css/user/footer.css')}}" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" >
 </head>
-<body onload="year()">
+<body>
     <div class="footerBox">
         <div class="footer">
-            <div class="about">
+            <div class="about-menu">
                 <h2>Menu</h2>
-                <p><a href="{{route('home')}}">Home</a></p>
-                <p><a href="{{route('about')}}">About</a></p>
-                <p><a href="{{route('service')}}">Service</a></p>
-                <p><a href="{{route('contact')}}">Contact</a></p>
-                <p><a href="{{route('logout')}}">Logout</a></p>
+                <a href="{{route('home')}}">Home</a>
+                <a href="{{route('about')}}">About</a>
+                <a href="{{route('service')}}">Service</a>
+                <a href="{{route('contact')}}">Contact</a>
+                @if(session()->has('user_id'))
+                <a href="{{route('logout')}}">Logout</a>
+                @else
+                <a href="{{route('register')}}">Register</a>
+                <a href="{{route('login')}}">Login</a>
+                @endif
             </div>
-            <div class="contact">
+            <div class="about-contact">
                 <h2>Contact Us</h2>
-                <p><i class="fa-solid fa-phone"></i> +91 1234567890</p>
-                <p><i class="fa-solid fa-envelope"></i> sharmafurniture@gmail.com</p>
-                <p><i class="fa-solid fa-location"></i> Mankhurd, Maharashtra Nagar</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+911234567890">+91 1234567890</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:sharmafurniture@gmail.com">sharmafurniture@gmail.com</a></p>
+                <p><i class="fa-solid fa-location"></i> <a href="https://www.google.com/maps?q=Mankhurd,+Maharashtra+Nagar" target="_blank">Mankhurd, Maharashtra Nagar</a></p>
             </div>
-            <div class="social">
+            <div class="about-social">
                 <h2>Follow Us</h2>
-                <p><a href="https://www.facebook.com/profile.php?id=100042969632345"><img src="/images/Facebook.webp" alt="Facebook"></a></p>
-                <p><a href="https://www.instagram.com/_.n482"><img src="/images/Instagram.webp" alt="Instagram"></a></p>
-                <p><a href="https://in.linkedin.com/in/shivlal-kumar-sharma"><img src="/images/LinkedIn.png" alt="LinkedIn"></a></p>
-                <p><a href="https://x.com/Shivlal85478071"><img src="/images/x.jpg" alt="X"></a></p>
+                <a href="https://www.facebook.com/profile.php?id=100042969632345"><img src="/images/Facebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/_.n482"><img src="/images/Instagram.png" alt="Instagram"></a>
+                <a href="https://in.linkedin.com/in/shivlal-kumar-sharma"><img src="/images/LinkedIn.png" alt="LinkedIn"></a>
+                <a href="https://x.com/Shivlal85478071"><img src="/images/x.png" alt="X"></a>
             </div>
         </div>
-        <p id="copyright">Copyright &copy; <span></span> All rights are reserved</p>
+        <p id="copyright"> © @php echo date('Y') @endphp Sharma Furniture.&nbsp;All rights reserved.</p>
     </div>
-
-    <script>
-        function year(){
-            let span = document.getElementsByTagName('span')[0];
-            let d = new Date();
-            let year = d.getFullYear();
-            span.innerText = year;
-        }
-    </script>
 </body>
 </html>

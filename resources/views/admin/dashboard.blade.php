@@ -4,74 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="icon" type="image/jpg" href="/images/logo.jpg">
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-            display:flex;
-            flex-direction:column;
-            height: 100vh;
-            background:url('/images/admin/bg2.jpg') no-repeat center center/cover;
-        }
-
-        .box{
-            display:flex;
-            flex-direction:column;
-            font-size:1.1rem;
-            margin-inline:auto;
-            margin-block:auto;
-            padding:10px;
-        }
-
-        .data{
-            color:#fff;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            border:2px solid #00ffff;
-            border-radius:5px;
-            margin-block:10px;
-            padding:5px 10px;
-        }
-
-        #users{
-            color:#0f0;
-            font-size:1.5rem;
-        }
-
-        #contacts{
-            color:#ff0;
-            font-size:1.5rem;
-        }
-
-        #users-trashed{
-            color:pink;
-            font-size:1.5rem;
-        }
-
-        #contacts-trashed{
-            color:#ffcc11;
-            font-size:1.5rem;
-        }
-
-        b{
-            font-size:1.3rem;
-        }
-    </style>
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="{{asset('css/admin/dashboard.css')}}">
 </head>
 <body>
-    @include('admin.navbar')
-        <div class="box">
-            <div class="data"><p id="users">Total Users </p><b>{{$users}}</b></div>
-            <div class="data"><p id="contacts">Total Contacts </p><b>{{$contacts}}</b></div>
-            <div class="data"><p id="users-trashed">Total Users In Trashed </p><b>{{$usersTrashed}}</b></div>
-            <div class="data"><p id="contacts-trashed">Total Contacts In Trashed </p><b>{{$contactsTrashed}}</b></div>
-        </div>
+    @include('admin.header')
+    <main>
+        <section class="overview-cards">
+            <div class="card">Total Users: <span>{{number_format($total_users)}}</span></div>
+            <div class="card">Active Users: <span>{{number_format($total_active_users)}}</span></div>
+            <div class="card">Inactive Users: <span>{{number_format($total_inactive_users)}}</span></div>
+            <div class="card">Total Trashed Users: <span>{{number_format($total_trashed_users)}}</span></div>
+            <div class="card">Total Admins: <span>{{number_format($total_admins)}}</span></div>
+            <div class="card">Active Admins: <span>{{number_format($total_active_admins)}}</span></div>
+            <div class="card">Inactive Admins: <span>{{number_format($total_inactive_admins)}}</span></div>
+            <div class="card">Total Trashed Admins: <span>{{number_format($total_trashed_admins)}}</span></div>
+            <div class="card">Total Contacts: <span>{{number_format($total_contacts)}}</span></div>
+            <div class="card">Total Trashed Contacts: <span>{{number_format($total_trashed_contacts)}}</span></div>
+        </section>
+    </main>
 </body>
 </html>

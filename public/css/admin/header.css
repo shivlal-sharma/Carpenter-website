@@ -1,0 +1,188 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.header::before{
+    content: '';
+    background-color: black;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.header a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    margin-inline: 20px;
+}
+
+.navbar-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: 20px;
+}
+
+#hamburger{
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.navbar-left a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: 10px;
+}
+
+.navbar-left a img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.navbar-center{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+}
+
+.modal{
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: -100%;
+    padding: 30px;
+    transition: left 0.5s ease;
+}
+
+.sidebar #cancel{
+    position: absolute;
+    top: -5px;
+    right: -25px;
+    font-size: 35px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.sidebar a{
+    display: inline;
+    width: fit-content;
+    margin-block: 10px;
+    color: #fff;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+/* header responsive */
+@media (max-width:1410px) {
+    .trashed-contact{
+        display: none;
+    }
+}
+
+@media (max-width:1250px) {
+    .trashed-user{
+        display: none;
+    }
+}
+
+@media (max-width:1100px) {
+    .add-admin{
+        display: none;
+    }
+}
+
+@media (max-width:950px) {
+    .add-contact{
+        display: none;
+    }
+}
+
+@media (max-width:800px) {
+    .add-user{
+        display: none;
+    }
+}
+
+@media (max-width:700px) {
+    .admin{
+        display: none;
+    }
+}
+
+@media (max-width:600px){
+    .contact{
+        display: none;
+    }
+}
+
+@media (max-width:480px) {
+    .header{
+        height: 60px;
+    }
+    #hamburger{
+        font-size: 18px;
+    }
+    .header a{
+        margin-inline: 10px;
+        font-size: 1.1rem;
+    }
+    .navbar-left a img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width:380px) {
+    .user{
+        display: none;
+    }
+}
+
+/* sidebar responsive */
+@media (max-width:480px){
+    .sidebar a{
+        font-size: 1.1rem;
+    }
+    .sidebar{
+        width: 180px;
+    }
+}

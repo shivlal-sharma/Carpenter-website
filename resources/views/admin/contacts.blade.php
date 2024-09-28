@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts-Info</title>
-    <link rel="icon" type="image/jpg" href="/images/logo.jpg">
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="{{asset('css/admin/users.css')}}">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'>
-    <style>
-        body{
-            background: url('/images/admin/bg3.jpg') no-repeat center center/cover;
-        }
-    </style>
 </head>
 <body>
-    @include('admin.navbar')
+    @include('admin.header')
+
     <div class="content">
+        
         @if(session()->has('success'))
         <div class="success">
             {{session()->get('success')}}
@@ -29,7 +26,9 @@
             <i class="fa-sharp fa-solid fa-xmark" onclick="remove(this)"></i>
         </div>
         @endif
-        <table border="1">
+
+        @if($contactsData->isNotEmpty())
+        <table>
             <thead>
                 <tr>
                     <th>Contact_Id</th>
@@ -37,7 +36,8 @@
                     <th>Address</th>
                     <th>Email</th>
                     <th>Message</th>
-                    <th>Updated_at</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -49,6 +49,7 @@
                     <td>{{$contact->address}}</td>
                     <td>{{$contact->email}}</td>
                     <td>{{$contact->message}}</td>
+                    <td>{{$contact->created_at}}</td>
                     <td>{{$contact->updated_at}}</td>
                     <td>
                         <a id="trash" href="{{route('contactTrash',$contact->contact_id)}}">Trash</a>
@@ -58,6 +59,9 @@
             </tbody>
             @endforeach
         </table>
+        @else
+            <h2>There is no Message</h2>
+        @endif
     </div>
 
     <script>

@@ -7,58 +7,104 @@
 .footerBox{
     border: none;
     outline: none;
-    background: #e2e2e2;
+    background: url('/images/bg.png') no-repeat center center/cover;
+    padding-bottom: 10px;
 }
 
 .footer{
     display: flex;
     justify-content: space-evenly;
+}
+
+.footer h2{
+    color: #edff00;
+    margin-bottom: 5px;
+}
+
+.about-menu{
     padding: 10px;
 }
 
-.about{
-    padding: 10px;
-}
-
-.contact{
-    padding: 10px;
-}
-
-.social{
-    padding: 10px;
-}
-
-h2{
-    margin-bottom: 10px;
-}
-
-.social img{
-    object-fit: contain;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-inline: 3px;
-}
-
-.social p{
-    display: inline-block;
-}
-
-p{
+.about-menu a{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    width: fit-content;
     font-size: 1.1rem;
 }
 
-i{
+.about-contact{
+    padding: 10px;
+}
+
+.about-contact p{
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.about-contact p a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.about-contact p i{
     margin-right: 5px;
 }
 
-a{
-    text-decoration: none;
-    color: #000;
+.about-social{
+    padding: 10px;
+}
+
+.about-social a{
+    display: inline-block;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    margin-inline: 3px;
+}
+
+.about-social a img{
+    object-fit: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
 }
 
 #copyright{
-    font-size: 1.2rem;
+    background-color: rgba(0,0,0,0.5);
     text-align: center;
-    margin-bottom: 10px;
+    color: #fff;
+    padding: 3px 10px;
+}
+
+@media (max-width:525px){
+    .footer h2{
+        font-size: 1.3rem;
+    }
+    .about-menu a{
+        font-size: 1rem;
+    }
+    .about-contact p{
+        font-size: 1rem;
+    }
+    .about-contact p i{
+        font-size: 15px;
+    }
+    .about-social a{
+        height: 23px;
+        line-height: 23px;
+    }
+    .about-social a img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width:475px){
+    .footer{
+        max-width: 280px;
+        flex-wrap: wrap;
+        justify-content: left;
+        margin-inline: auto;
+    }
 }

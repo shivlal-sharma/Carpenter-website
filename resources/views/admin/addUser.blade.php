@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <link rel="icon" type="image/jpg" href="/images/logo.jpg">
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel='stylesheet' href='{{asset("css/user/register.css")}}'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'>
-    <style>
-        body{
-            background: url('/images/admin/bg3.jpg') no-repeat center center/cover;
-        }
-    </style>
 </head>
 <body>
-    @include('admin.navbar')
+    @include('admin.header')
     
     <div class="content">
         @if(session()->has('success'))
@@ -35,25 +30,25 @@
             <div class="box"><span class="heading">Registration</span></div>
             @csrf
             <div class="input">
-                <input type="text" name='name' placeholder="Enter your name" required autofocus autocomplete="off">
+                <input type="text" name='name' value="{{old('name')}}" placeholder="Enter your name" required autofocus>
                 <i class="fa-sharp fa-solid fa-user"></i>
             </div>
             <div class="input">
-                <input type="text" name='address' placeholder="Enter your address" required autofocus autocomplete="off">
+                <input type="text" name='address' value="{{old('address')}}" placeholder="Enter your address" required autofocus>
                 <i class="fa-sharp fa-solid fa-location"></i>
             </div>
             <div class="input">
-                <input type="email" name='email' placeholder="Enter your email" onkeyup="check1(this.value)" required autofocus autocomplete="off">
+                <input type="email" name='email' value="{{old('email')}}" placeholder="Enter your email" onkeyup="check1(this.value)" required autofocus>
                 <i class="fa-sharp fa-solid fa-envelope"></i>
                 <p class="alert"></p>
             </div>
             <div class="input">
-                <input type="password" name='password' id="password" placeholder="Enter your password" onkeyup="check2(this.value)" required autofocus autocomplete="off">
-                <i id="show" class="fa-sharp fa-solid fa-eye"></i>
+                <input type="password" name='password' id="password" placeholder="Enter your password" onkeyup="check2(this.value)" required autofocus>
+                <i id="show" class="fa-sharp fa-solid fa-eye-slash"></i>
                 <p class="alert"></p>
             </div>
             <div class="input">
-                <input type="password" name='password_confirmation' placeholder="Enter confirm password" onkeyup="check3(this.value)" required autofocus autocomplete="off">
+                <input type="password" name='password_confirmation' placeholder="Enter confirm password" onkeyup="check3(this.value)" required autofocus>
                 <p class="alert">
                 @foreach($errors->all() as $error)
                 {{$error}}

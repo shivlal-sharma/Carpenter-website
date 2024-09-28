@@ -2,14 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
 }
 
 body{
     height: 100vh;
+    line-height: 1.6;
     display: flex;
     flex-direction: column;
-    background: url('/images/user/bg4.jpg') no-repeat center center/cover;
+    background: url('/images/bg.png') no-repeat center center/cover;
 }
 
 .box{
@@ -20,22 +20,87 @@ body{
     margin-inline: auto;
     margin-block: auto;
     color: #fff;
-    width: 40vw;
+    width: 45vw;
     padding: 10px;
 }
 
 h2{
-    margin-bottom: 10px;
+    font-size: 2rem;
 }
 
 p{
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     text-indent: 30px;
     text-align: justify;
 }
 
 p b{
-    font-style: italic;
-    text-decoration: underline;
-    color: rgb(0, 255, 0);
+    color: #00fff1;
+}
+
+@media (max-width:1300px){
+    .box{
+        width: 50vw;
+    }
+}
+
+@media (max-width:1200px){
+    .box{
+        width: 55vw;
+    }
+}
+
+@media (max-width:1050px){
+    .box{
+        width: 60vw;
+    }
+}
+
+@media (max-width:850px){
+    .box{
+        width: 65vw;
+    }
+}
+
+@media (max-width:750px){
+    .box{
+        width: 70vw;
+    }
+    h2{
+        font-size: 1.8rem;
+        margin-bottom: 0px;
+    }
+    p{
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width:600px){
+    .box{
+        width: 80vw;
+    }
+    h2{
+        font-size: 1.5rem;
+    }
+    p{
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width:450px){
+    .box{
+        width: 90vw;
+    }
+    h2{
+        font-size: 1.2rem;
+    }
+    p{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width:400px) {
+    .box{
+        width: 95vw;
+    }
 }

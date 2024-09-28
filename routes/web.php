@@ -3,48 +3,61 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\AdminNotAuth;
+use App\Http\Middleware\UserAuth;
+use App\Http\Middleware\UserNotAuth;
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+Route::view('privacy-policy','user.privacy&policy')->name('privacy&policy');
 
-Route::view('user/footer','user.footer')->name('footer');
+Route::view('','user.home')->name('home');
 
-Route::view('user/register','user.register')->name('register');
+Route::view('about','user.about')->name('about');
 
-Route::view('user/login','user.login')->name('login');
+Route::view('service','user.service')->name('service');
 
-Route::view('user/service/wardrobes','user.designs.wardrobe')->name('wardrobe');
+Route::view('service/wardrobes','user.designs.wardrobe')->name('wardrobe');
 
-Route::view('user/service/beds','user.designs.bed')->name('bed');
+Route::view('service/beds','user.designs.bed')->name('bed');
 
-Route::view('user/service/halls','user.designs.hall')->name('hall');
+Route::view('service/halls','user.designs.hall')->name('hall');
 
-Route::view('user/service/kitchens','user.designs.kitchen')->name('kitchen');
+Route::view('service/kitchens','user.designs.kitchen')->name('kitchen');
 
-Route::view('user/service/dinings','user.designs.dining')->name('dining');
+Route::view('service/dinings','user.designs.dining')->name('dining');
 
-Route::view('user/service/ceilings','user.designs.ceiling')->name('ceiling');
+Route::view('service/ceilings','user.designs.ceiling')->name('ceiling');
 
-Route::view('user/service/walls','user.designs.wall')->name('wall');
+Route::view('service/walls','user.designs.wall')->name('wall');
 
-Route::prefix('user')->controller(UserController::class)->group(function(){
+Route::middleware(UserNotAuth::class)->group(function(){
+    
+    Route::view('register','user.register')->name('register');
 
-    Route::get('','home')->name('home');
+    Route::view('login','user.login')->name('login');
 
-    Route::get('about','about')->name('about');
+    Route::view('forget-password','user.forget_pass')->name('forget_password');
+});
 
-    Route::get('service','service')->name('service');
+Route::view('contact','user.contact')->name('contact')->middleware(UserAuth::class);
 
-    Route::get('contact','contact')->name('contact');
+Route::controller(UserController::class)->middleware(UserNotAuth::class)->group(function(){
 
-    Route::post('contact','contactStore')->name('contactStore');
+    Route::post('contact','contactStore')->name('contactStore')->withoutMiddleware(UserNotAuth::class)->middleware(UserAuth::class);
 
     Route::post('register','registerStore')->name('registerStore');
 
+    Route::get('verify-email/{token}','verifyEmail')->name('verifyEmail');
+
     Route::post('login','loginStore')->name('loginStore');
 
-    Route::get('logout','logout')->name('logout');
+    Route::post('forget-password','forgetPassword')->name('forget_Password');
+
+    Route::get('reset-password/{token}','viewResetPassPage')->name('reset_password');
+
+    Route::post('reset-password','resetPassword')->name('resetPassword');
+
+    Route::get('logout','logout')->name('logout')->withoutMiddleware(UserNotAuth::class)->middleware(UserAuth::class);
 
 });
 
@@ -53,14 +66,35 @@ Route::prefix('user')->controller(UserController::class)->group(function(){
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Route::view('admin/user-add','admin.addUser')->name('userAdd');
 
-Route::view('admin/contact-add','admin.addContact')->name('contactAdd');
+Route::view('admin/sign_in','admin.sign_in')->name('admin_sign_in')->middleware(AdminNotAuth::class);
 
-Route::prefix('admin')->controller(AdminController::class)->group(function(){
+Route::view('admin/forget-password','admin.forgetPassword')->name('forgetPassword')->middleware(AdminNotAuth::class);
+
+Route::view('admin/user-add','admin.addUser')->name('userAdd')->middleware(AdminAuth::class);
+
+Route::view('admin/contact-add','admin.addContact')->name('contactAdd')->middleware(AdminAuth::class);
+
+Route::view('admin/admin-add','admin.addAdmin')->name('adminAdd')->middleware(AdminAuth::class);
+
+Route::prefix('admin')->controller(AdminController::class)->middleware(AdminAuth::class)->group(function(){
 
     Route::get('dashboard','dashboard')->name('dashboard');
+
+    Route::post('sign_in','adminLogin')->name('adminLogin')->withoutMiddleware(AdminAuth::class)->middleware(AdminNotAuth::class);
+
+    Route::post('forget-password','forgetPassword')->name('adminForgetPassword')->withoutMiddleware(AdminAuth::class)->middleware(AdminNotAuth::class);
+
+    Route::get('reset-password/{token}','viewResetPassPage')->name('resetPassword')->withoutMiddleware(AdminAuth::class)->middleware(AdminNotAuth::class);
+
+    Route::post('reset-password','resetPassword')->name('adminResetPassword')->withoutMiddleware(AdminAuth::class)->middleware(AdminNotAuth::class);
+
+    Route::get('sign_out','adminLogout')->name('adminLogout');
 
     Route::get('user-info','users')->name('user-info');
 
@@ -98,5 +132,26 @@ Route::prefix('admin')->controller(AdminController::class)->group(function(){
     Route::get('contact-force-delete/{id}','contactForceDelete')->name('contactForceDelete');
 
     Route::get('contact-restore/{id}','contactRestore')->name('contactRestore');
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    Route::get('admin-info','admins')->name('admin-info');
+
+    Route::post('admin-add','adminAdd')->name('adminAdd');
+
+    Route::get('admin-info/{id}','adminTrash')->name('adminTrash');
+
+    Route::get('admin-edit/{id}','adminEditPage')->name('adminEditPage');
+
+    Route::post('admin-edit/{id}','adminEdit')->name('adminEdit');
+
+    Route::get('admin-trash-view','adminTrashView')->name('adminTrashView');
+
+    Route::get('admin-force-delete/{id}','adminForceDelete')->name('adminForceDelete');
+
+    Route::get('admin-restore/{id}','adminRestore')->name('adminRestore');
 
 });

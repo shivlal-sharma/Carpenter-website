@@ -8,14 +8,20 @@ body{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: url('/images/admin/bg2.jpg') no-repeat center center/cover;
+    background: url('/images/bg.png') no-repeat center center/cover;
 }
 
 .content{
-    height: 90vh;
+    overflow-x: auto;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.content h2{
+    font-size: 1.5rem;
+    margin-inline: auto;
+    color: #fff;
 }
 
 .success{
@@ -27,6 +33,7 @@ body{
     text-align: center;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-inline: auto;
 }
 
 .error{
@@ -38,9 +45,10 @@ body{
     text-align: center;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-inline: auto;
 }
 
-i{
+.content i{
     margin-left:15px;
     color: #00ffcc;
     cursor: pointer;
@@ -48,34 +56,43 @@ i{
 
 table{
     width: 100%;
-   color: #fff;
-   font-size: 1.1rem;
-   text-align: center;
-   outline: none;
+    border-collapse: collapse;
 }
 
-thead{
-    height: 45px;
+th,td{
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid #ffffff;
+    padding: 8px;
+}
+
+th{
     color: #ffff00;
 }
 
-tbody{
-    height: 40px;
-}
-
 td a{
+    display: inline-block;
     text-decoration: none;
-    padding: 3px 10px;
-    background-color: #fff;
-    border-radius: 3px;
-    border: none;
-    outline: none;
+    margin: 5px;
 }
 
 #trash{
-    color: red;
+    color: #ffba00;
 }
 
 #edit{
-    color: #0000ff;
+    color: #00faff;
+}
+
+@media (max-width:450px){
+    .content h2{
+        font-size: 1.3rem;
+    }
+    .success{
+        font-size: 1.1rem;
+    }
+    .error{
+        font-size: 1.1rem;
+    }
 }

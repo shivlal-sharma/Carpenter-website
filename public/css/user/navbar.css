@@ -5,45 +5,164 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.container{
+.header{
     height: 70px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: relative;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
 }
 
-.container::before{
+.header::before{
     content: '';
     background-color: black;
     position: absolute;
     height: 100%;
     width: 100%;
-    opacity: 0.3;
+    opacity: 0.5;
     z-index: -1;
 }
 
-ul{
-    width: 100%;
+.header a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    margin-inline: 20px;
+}
+
+.navbar-left{
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-img{
-    margin-left: 30px;
+#hamburger{
+    display: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.navbar-left a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-left a img{
     width: 60px;
     height: 60px;
     border-radius: 50%;
 }
 
-li{
-    list-style: none;
-    margin-inline: 20px;
+.navbar-center{
+    display: flex;
+    align-items: center;
 }
 
-ul li a{
-    font-size: 1.3rem;
+.navbar-right{
+    display: flex;
+    align-items: center;
+}
+
+.modal{
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: -100%;
+    padding: 30px;
+    transition: left 0.5s ease;
+}
+
+.sidebar #cancel{
+    position: absolute;
+    top: -5px;
+    right: -25px;
+    font-size: 35px;
     color: #fff;
+    cursor: pointer;
+}
+
+.sidebar a{
+    display: inline;
+    width: fit-content;
+    margin-block: 10px;
+    color: #fff;
+    font-size: 20px;
     text-decoration: none;
+}
+
+@media (max-width:750px){
+    .contact{
+        display: none;
+    }
+    .navbar-left{
+        margin-inline: 20px;
+    }
+    #hamburger{
+        display: block;
+    }
+}
+
+@media (max-width:680px){
+    .about{
+        display: none;
+    }
+}
+
+@media (max-width:580px){
+    .header a{
+        margin-inline: 10px;
+    }
+    .navbar-left{
+        margin-inline: 10px;
+    }
+}
+
+@media (max-width:480px){
+    .service{
+        display: none;
+    }
+}
+
+@media (max-width:400px){
+    .header{
+        height: 60px;
+    }
+    .header a{
+        font-size: 17px;
+    }
+    #hamburger{
+        font-size: 20px;
+    }
+    .navbar-left a img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* sidebar responsive */
+@media (max-width:400px){
+    .sidebar{
+        width: 180px;
+    }
 }

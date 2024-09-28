@@ -4,24 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
-    <link rel="icon" type="image/jpg" href="/images/logo.jpg">
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" href="{{asset('css/user/navbar.css')}}">
 </head>
 <body>
-    <div class="container">
-        <ul>
-            <img class="image" src="/images/logo.jpg" alt="Sharma Furniture">
-            <li><a href="{{route('home')}}">Home</a></li>
-            <li><a href="{{route('about')}}">About</a></li>
-            <li><a href="{{route('service')}}">Service</a></li>
-            <li><a href="{{route('contact')}}">Contact</a></li>
-            @if(session()->has('loggedId'))
-            <li><a href="{{route('logout')}}">Logout</a></li>
+    <div class="header">
+        <div class="navbar-left">
+            <span id="hamburger">&#9776;</span>
+            <a href="{{route('privacy&policy')}}"><img class="image" src="/images/logo.png" alt="Sharma Furniture"></a>
+        </div>
+        <div class="navbar-center">
+            <a href="{{route('home')}}" class="home">Home</a>
+            <a href="{{route('about')}}" class="about">About</a>
+            <a href="{{route('service')}}" class="service">Service</a>
+            <a href="{{route('contact')}}" class="contact">Contact</a>
+        </div>
+        <div class="navbar-right">
+            @if(session()->has('user_id'))
+            <a href="{{route('logout')}}" class="logout">Logout</a>
             @else
-            <li><a href="{{route('register')}}">Register</a></li>
-            <li><a href="{{route('login')}}">Login</a></li>
+            <a href="{{route('register')}}" class="register">Register</a>
+            <a href="{{route('login')}}" class="login">Login</a>
             @endif
-        </ul>
+        </div>
     </div>
+    <div class="modal">
+        <div class="sidebar">
+            <span id="cancel">&times;</span>
+            <a href="{{route('home')}}" class="home">Home</a>
+            <a href="{{route('about')}}" class="about">About</a>
+            <a href="{{route('service')}}" class="service">Service</a>
+            <a href="{{route('contact')}}" class="contact">Contact</a>
+            @if(session()->has('user_id'))
+            <a href="{{route('logout')}}" class="logout">Logout</a>
+            @else
+            <a href="{{route('register')}}" class="register">Register</a>
+            <a href="{{route('login')}}" class="login">Login</a>
+            @endif
+        </div>
+    </div>
+
+    <script src="{{asset('js/sidebar.js')}}"></script>
 </body>
 </html>
