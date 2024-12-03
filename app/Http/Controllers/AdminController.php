@@ -202,27 +202,76 @@ class AdminController extends Controller
         return view('admin.editUser',compact('user'));
     }
 
-    public function userEdit($id, UserRequest $req){
-        $req->validate([
-            'password'=>'required|confirmed'
-        ]);
-
+    public function userEdit($id, Request $req){
         $user = User::find($id);
-        if(!is_null($user)){
-            $user->name = $req['name'];
-            $user->address = $req['address'];
-            $user->email = $req['email'];
+
+        if(is_null($user)) {
+            return redirect()->route('user-info');
+        }
+    
+        $rules = [
+            'name' => 'required|string|max:255',
+            'password_confirmation' => 'required_with:password|same:password',
+            'status'=>'required|string|max:8',
+            'token'=>'required'
+        ];
+        
+        if ($req->status === 'active') {
+            $rules['email'] = [
+                'required',
+                'email',
+                'max:255',
+                function ($attribute, $value, $fail) use ($id) {
+                    $existingUser = User::where('email', $value)
+                                          ->where('status', 'active')
+                                          ->where('users_id', '<>', $id)  // Exclude the current admin
+                                          ->first();
+    
+                    if ($existingUser) {
+                        $fail('Email already exists.');
+                    }
+                }
+            ];
+        }
+    
+        // Add password regex validation only if the password is being updated
+        if ($req->has('password') && !Hash::check($req->password, $user->password)) {
+            $rules['password'] = [
+                'nullable',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                'confirmed'
+            ];
+        }
+    
+        // Custom validation messages
+        $messages = [
+            'name'=>'required|string|max:255',
+            'email.required' => 'Email must be required.',
+            'email.email' => 'Invalid email address.',
+            'email.unique' => 'Email already exists.',
+            'password.regex' => 'Password must be 8+ chars, include uppercase, lowercase, number, and special char.',
+            'password.confirmed' => 'Passwords do not match.',
+            'password_confir=>mation.same' => 'Passwords do not match.',
+            'status.required'=>'Status must be required',
+            'status.max'=>'Status should not be more than 8 chars',
+            'token.required'=>'Token must be required'
+        ];
+    
+        // Perform validation
+        $req->validate($rules, $messages);
+        
+        $user->name = $req['name'];
+        $user->address = $req['address'];
+        $user->email = $req['email'];
+        if($req->has('password') && !Hash::check($req->password, $user->password)){
             $user->password = Hash::make($req->password);
-            $user->status = $req['status'];
-            $user->token = $req['token'];
-            $user->updated_at = Carbon::now();
-            $user->save();
-            if($user->save()){
-                return redirect()->route('user-info')->with('success','User updated successfully!');
-            }
-            else{
-                return redirect()->route('userEdit',$user->users_id)->with('error','Something went wrong...');
-            }
+        }
+        $user->status = $req['status'];
+        $user->token = $req['token'];
+        $user->updated_at = Carbon::now();
+        $user->save();
+        if($user->save()){
+            return redirect()->route('user-info')->with('success','User updated successfully!');
         }
         else{
             return redirect()->route('userEdit',$user->users_id)->with('error','Something went wrong...');
@@ -267,6 +316,13 @@ class AdminController extends Controller
     }
 
     public function contactAdd(Request $req){
+        $req->validate([
+            'email'=>'required|email'
+        ],
+        [
+            'email.email'=>'Invalid email address'
+        ]);
+
         $contact = Contact::where([['name','=',$req->name],['address','=',$req->address],['email','=',$req->email],['message','=',$req->message]])->first();
         if($contact){
             return redirect()->route('contactAdd')->with('error','Message already exists...');
@@ -419,24 +475,73 @@ class AdminController extends Controller
     }
 
     public function adminEdit(Request $req,$id){
-        $req->validate([
-            'password'=>'required|confirmed'
-        ],['password.confirmed'=>'Incorrect confirm password']);
-
         $admin = Admin::find($id);
-        if(!is_null($admin)){
-            $admin->name = $req->name;
-            $admin->email = $req->email;
+
+        if (is_null($admin)) {
+            return redirect()->route('admin-info');
+        }
+    
+        $rules = [
+            'name' => 'required|string|max:255',
+            'password_confirmation' => 'required_with:password|same:password',
+            'status'=>'required|string|max:8',
+            'token'=>'required'
+        ];
+
+        if ($req->status === 'active') {
+            $rules['email'] = [
+                'required',
+                'email',
+                'max:255',
+                function ($attribute, $value, $fail) use ($id) {
+                    $existingAdmin = Admin::where('email', $value)
+                                          ->where('status', 'active')
+                                          ->where('admin_id', '<>', $id)  // Exclude the current admin
+                                          ->first();
+    
+                    if ($existingAdmin) {
+                        $fail('Email already exists.');
+                    }
+                }
+            ];
+        }
+    
+        // Add password regex validation only if the password is being updated
+        if ($req->filled('password') && !Hash::check($req->password, $admin->password)) {
+            $rules['password'] = [
+                'nullable',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                'confirmed'
+            ];
+        }
+    
+        // Custom validation messages
+        $messages = [
+            'name'=>'required|string|max:255',
+            'email.required' => 'Email must be required.',
+            'email.email' => 'Invalid email address.',
+            'email.unique' => 'Email already exists.',
+            'password.regex' => 'Password must be 8+ chars, include uppercase, lowercase, number, and special char.',
+            'password.confirmed' => 'Passwords do not match.',
+            'password_confir=>mation.same' => 'Passwords do not match.',
+            'status.required'=>'Status must be required',
+            'status.max'=>'Status should not be more than 8 chars',
+            'token.required'=>'Token must be required'
+        ];
+    
+        // Perform validation
+        $req->validate($rules, $messages);
+
+        $admin->name = $req->name;
+        $admin->email = $req->email;
+        if($req->filled('password') && !Hash::check($req->password,$admin->password)){
             $admin->password = Hash::make($req->password);
-            $admin->status = $req->status;
-            $admin->token = $req->token;
-            $admin->updated_at = Carbon::now();
-            if($admin->save()){
-                return redirect()->route('admin-info')->withSuccess('Admin updated successfully!');
-            }
-            else{
-                return redirect()->route('adminEdit',$admin->admin_id)->withError('Something went wrong...');
-            }
+        }
+        $admin->status = $req->status;
+        $admin->token = $req->token;
+        $admin->updated_at = Carbon::now();
+        if($admin->save()){
+            return redirect()->route('admin-info')->withSuccess('Admin updated successfully!');
         }
         else{
             return redirect()->route('adminEdit',$admin->admin_id)->withError('Something went wrong...');

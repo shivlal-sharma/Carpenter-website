@@ -20,6 +20,13 @@ use Illuminate\Support\Facades\Crypt;
 class UserController extends Controller
 {
     public function contactStore(Request $req){
+        $req->validate([
+            'email'=>'required|email'
+        ],
+        [
+            'email.email'=>'Invalid email address'
+        ]);
+
         $data = DB::table('contact')->where([['name','=',$req->name],['address','=',$req->address],['email','=',$req->email],['message','=',$req->message]])->first();
         
         if($data){

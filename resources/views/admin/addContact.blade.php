@@ -26,7 +26,7 @@
             <i class="fa-sharp fa-solid fa-xmark" onclick="remove(this)"></i>
         </div>
         @endif
-        <form action="{{route('contactAdd')}}" method='post' onsubmit="return validate()">
+        <form action="{{route('contactAdd')}}" method='post'>
             <div class="box"><span class="heading">Contact Us</span></div>
             @csrf
             <div class="input">
@@ -38,9 +38,13 @@
                 <i class="fa-sharp fa-solid fa-location"></i>
             </div>
             <div class="input">
-                <input type="email" name='email' value="{{old('email')}}" placeholder="Enter your email" onkeyup="check1(this.value)" required autofocus>
+                <input type="email" name='email' value="{{old('email')}}" placeholder="Enter your email" required autofocus>
                 <i class="fa-sharp fa-solid fa-envelope"></i>
-                <p class="alert"></p>
+                <p class="alert">
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <div class="input">
                 <input type="text" name='message' value="{{old('message')}}" placeholder="Enter your message" required autofocus>

@@ -1,4 +1,6 @@
-let flag = 0;
+let emailValid = false;
+let passwordValid = false;
+let confirmPasswordValid = false;
 
 let error = document.getElementsByClassName('alert');
 
@@ -12,87 +14,74 @@ const eightChar = new RegExp(".{8,}");
 const email = new RegExp("^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$");
 const whiteSpace = new RegExp("\\s");
 
-function check1(data){
-    if(data.length > 0){
-        if(whiteSpace.test(data)==1){
+function check1(data) {
+    if (data.length > 0) {
+        if (whiteSpace.test(data)) {
             error[0].innerText = 'White Space not allowed';
-            flag = 0;
-        }
-        else if(email.test(data)==0){
+            emailValid = false;
+        } else if (!email.test(data)) {
             error[0].innerText = 'Enter valid Email';
-            flag = 0;
-        }
-        else{
+            emailValid = false;
+        } else {
             error[0].innerText = '';
-            flag = 1;
+            emailValid = true;
         }
-    }
-    else{
+    } else {
         error[0].innerText = '';
-        flag = 0;
+        emailValid = false;
     }
 }
 
-function check2(data){
-    if(data.length > 0){
-        if(whiteSpace.test(data)==1){
+function check2(data) {
+    if (data.length > 0) {
+        if (whiteSpace.test(data)) {
             error[1].innerText = 'White Space not allowed';
-            flag = 0;
-        }
-        else if(uppercase.test(data)==0){
-            error[1].innerText = 'Enter atleast 1 upper character';
-            flag = 0;
-        }
-        else if(lowercase.test(data)==0){
-            error[1].innerText = 'Enter atleast 1 lower character';
-            flag = 0;
-        }
-        else if(digit.test(data)==0){
-            error[1].innerText = 'Enter atleast 1 digit';
-            flag = 0;
-        }
-        else if(specialChar.test(data)==0){
-            error[1].innerText = 'Enter atleast 1 special character';
-            flag = 0;
-        }
-        else if(eightChar.test(data)==0){
-            error[1].innerText = 'Enter atleast 8 character';
-            flag = 0;
-        }
-        else{
+            passwordValid = false;
+        } else if (!uppercase.test(data)) {
+            error[1].innerText = 'Enter at least 1 upper character';
+            passwordValid = false;
+        } else if (!lowercase.test(data)) {
+            error[1].innerText = 'Enter at least 1 lower character';
+            passwordValid = false;
+        } else if (!digit.test(data)) {
+            error[1].innerText = 'Enter at least 1 digit';
+            passwordValid = false;
+        } else if (!specialChar.test(data)) {
+            error[1].innerText = 'Enter at least 1 special character';
+            passwordValid = false;
+        } else if (!eightChar.test(data)) {
+            error[1].innerText = 'Enter at least 8 characters';
+            passwordValid = false;
+        } else {
             error[1].innerText = '';
-            flag = 1;
+            passwordValid = true;
         }
-    }
-    else{
+    } else {
         error[1].innerText = '';
-        flag = 0;
+        passwordValid = false;
     }
 }
 
-function check3(data){
+function check3(data) {
     let pass = document.getElementById('password').value;
-    if(data.length > 0){
-        if(data !== pass){
-            error[2].innerText = "Enter confirm password";
-            flag = 0;
-        }
-        else{
+    if (data.length > 0) {
+        if (data !== pass) {
+            error[2].innerText = "Passwords do not match";
+            confirmPasswordValid = false;
+        } else {
             error[2].innerText = '';
-            flag = 1;
+            confirmPasswordValid = true;
         }
-    }
-    else{
+    } else {
         error[2].innerText = '';
-        flag = 0;
+        confirmPasswordValid = false;
     }
 }
 
-function validate(){
-    if(flag == 1){
+function validate() {
+    if (emailValid && passwordValid && confirmPasswordValid) {
         return true;
-    }
-    else{
+    } else {
         return false;
     }
 }

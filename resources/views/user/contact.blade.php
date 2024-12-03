@@ -25,24 +25,28 @@
         </div>
         @endif
         
-        <form action="{{route('contactStore')}}" method='post' onsubmit="return validate()">
+        <form action="{{route('contactStore')}}" method='post'>
             <div class="box"><span class="heading">Contact Us</span></div>
             @csrf
             <div class="input">
-                <input type="text" name='name' placeholder="Enter your name" required autofocus autocomplete="off">
+                <input type="text" name='name' placeholder="Enter your name" required autofocus>
                 <i class="fa-sharp fa-solid fa-user"></i>
             </div>
             <div class="input">
-                <input type="text" name='address' placeholder="Enter your address" required autofocus autocomplete="off">
+                <input type="text" name='address' placeholder="Enter your address" required autofocus>
                 <i class="fa-sharp fa-solid fa-location"></i>
             </div>
             <div class="input">
-                <input type="email" name='email' placeholder="Enter your email" onkeyup="check1(this.value)" required autofocus autocomplete="off">
+                <input type="email" name='email' placeholder="Enter your email" required autofocus>
                 <i class="fa-sharp fa-solid fa-envelope"></i>
-                <p class="alert"></p>
+                <p class="alert">
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <div class="input">
-                <input type="text" name='message' placeholder="Enter your message" required autofocus autocomplete="off">
+                <input type="text" name='message' placeholder="Enter your message" required autofocus>
                 <i class="fa-sharp fa-solid fa-message"></i>
             </div>
             <button type="submit">Submit</button>

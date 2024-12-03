@@ -25,41 +25,68 @@
             <i class="fa-sharp fa-solid fa-xmark" onclick="remove(this)"></i>
         </div>
         @endif
-        <form action="{{route('userEdit',$user->users_id)}}" method='post' onsubmit="return validate()">
-        
+        <form action="{{route('userEdit',$user->users_id)}}" method='post'>
             <div class="box"><span class="heading">Edit User</span></div>
             @csrf
             <div class="input">
                 <input type="text" name='name' value="{{$user->name}}" placeholder="Enter your name" required autofocus>
                 <i class="fa-sharp fa-solid fa-user"></i>
+                <p class="alert">
+                    @error('name')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <div class="input">
                 <input type="text" name='address' value="{{$user->address}}" placeholder="Enter your address" required autofocus>
                 <i class="fa-sharp fa-solid fa-location"></i>
-            </div>
-            <div class="input">
-                <input type="email" name='email' value="{{$user->email}}" placeholder="Enter your email" onkeyup="check1(this.value)" required autofocus>
-                <i class="fa-sharp fa-solid fa-envelope"></i>
-                <p class="alert"></p>
-            </div>
-            <div class="input">
-                <input type="password" name='password' value="{{$user->password}}" id="password" placeholder="Enter your password" onkeyup="check2(this.value)" required autofocus>
-                <i id="show" class="fa-sharp fa-solid fa-eye-slash"></i>
-                <p class="alert"></p>
-            </div>
-            <div class="input">
-                <input type="password" name='password_confirmation' value="{{$user->password}}" placeholder="Enter confirm password" onkeyup="check3(this.value)" required autofocus>
                 <p class="alert">
-                @foreach($errors->all() as $error)
-                    {{$error}}
-                @endforeach
+                    @error('address')
+                        {{ $message }}
+                    @enderror
+                </p>
+            </div>
+            <div class="input">
+                <input type="email" name='email' value="{{$user->email}}" placeholder="Enter your email" autofocus>
+                <i class="fa-sharp fa-solid fa-envelope"></i>
+                <p class="alert">
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </p>
+            </div>
+            <div class="input">
+                <input type="password" name='password' id="password" placeholder="Enter your password" autofocus>
+                <i id="show" class="fa-sharp fa-solid fa-eye-slash"></i>
+                <p class="alert">
+                    @error('password')
+                        {{ $message }}
+                    @enderror
+                </p>
+            </div>
+            <div class="input">
+                <input type="password" name='password_confirmation' placeholder="Enter confirm password" autofocus>
+                <p class="alert">
+                    @error('password_confirmation')
+                        {{$message}}
+                    @enderror
                 </p>
             </div>
             <div class="input">
                 <input type="text" name='status' value="{{$user->status}}" placeholder="Enter your status" required autofocus>
+                <p class="alert">
+                    @error('status')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <div class="input">
                 <input type="text" name='token' value="{{$user->token}}" placeholder="Enter your token" required autofocus>
+                <p class="alert">
+                    @error('token')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <button type="submit">Edit User</button>
         </form>

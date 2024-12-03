@@ -25,37 +25,59 @@
             <i class="fa-sharp fa-solid fa-xmark" onclick="remove(this)"></i>
         </div>
         @endif
-        <form action="{{route('adminEdit',$admin->admin_id)}}" method='post' onsubmit="return validate()">
-        
+        <form action="{{route('adminEdit',$admin->admin_id)}}" method='post'>
             <div class="box"><span class="heading">Edit Admin</span></div>
             @csrf
             <div class="input">
                 <input type="text" name='name' value="{{$admin->name}}" placeholder="Enter your name" required autofocus>
                 <i class="fa-sharp fa-solid fa-user"></i>
-            </div>
-            <div class="input">
-                <input type="email" name='email' value="{{$admin->email}}" placeholder="Enter your email" onkeyup="check1(this.value)" required autofocus>
-                <i class="fa-sharp fa-solid fa-envelope"></i>
-                <p class="alert"></p>
-            </div>
-            <div class="input">
-                <input type="password" name='password' value="{{$admin->password}}" id="password" placeholder="Enter your password" onkeyup="check2(this.value)" required autofocus>
-                <i id="show" class="fa-sharp fa-solid fa-eye-slash"></i>
-                <p class="alert"></p>
-            </div>
-            <div class="input">
-                <input type="password" name='password_confirmation' value="{{$admin->password}}" placeholder="Enter confirm password" onkeyup="check3(this.value)" required autofocus>
                 <p class="alert">
-                @foreach($errors->all() as $error)
-                    {{$error}}
-                @endforeach
+                    @error('name')
+                        {{ $message }}
+                    @enderror
+                </p>
+            </div>
+            <div class="input">
+                <input type="email" name='email' value="{{$admin->email}}" placeholder="Enter your email" required autofocus>
+                <i class="fa-sharp fa-solid fa-envelope"></i>
+                <p class="alert">
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </p>
+            </div>
+            <div class="input">
+                <input type="password" name='password' id="password" placeholder="Enter your password" autofocus>
+                <i id="show" class="fa-sharp fa-solid fa-eye-slash"></i>
+                <p class="alert">
+                    @error('password')
+                        {{ $message }}
+                    @enderror
+                </p>
+            </div>
+            <div class="input">
+                <input type="password" name='password_confirmation' placeholder="Enter confirm password" autofocus>
+                <p class="alert">
+                    @error('password_confirmation')
+                        {{ $message }}
+                    @enderror
                 </p>
             </div>
             <div class="input">
                 <input type="text" name='status' value="{{$admin->status}}" placeholder="Enter your status" required autofocus>
+                <p class="alert">
+                    @error('status')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <div class="input">
                 <input type="text" name='token' value="{{$admin->token}}" placeholder="Enter your token" required autofocus>
+                <p class="alert">
+                    @error('token')
+                        {{ $message }}
+                    @enderror
+                </p>
             </div>
             <button type="submit">Edit Admin</button>
         </form>
