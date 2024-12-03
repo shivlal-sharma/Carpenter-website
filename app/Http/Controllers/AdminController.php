@@ -456,6 +456,12 @@ class AdminController extends Controller
     public function adminTrash($id){
         $admin = Admin::find($id);
         if($admin){
+            if (Session::get('admin_id') == $id) {
+                $admin->delete();
+                Session::pull('admin_id');
+                return $this->adminLogout()->withSuccess('Your account has been deleted successfully!');
+            }
+            
             $admin->delete();
             return redirect()->route('admin-info')->withSuccess('Admin moved to Trash!');
         }
